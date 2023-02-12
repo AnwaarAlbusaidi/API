@@ -5,20 +5,26 @@ import okhttp3.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+        Scanner scan = new Scanner(System.in);
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = RequestBody.create(mediaType, "");
-
+          WriteAndRead writeAndRead = new WriteAndRead();
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://maps.googleapis.com/maps/api/distancematrix/json").newBuilder();
-        urlBuilder.addQueryParameter("origins", "TRA, Muscat");
-        urlBuilder.addQueryParameter("destinations", "Oman,Adam");
+
+        System.out.println("Enter your origins in term (place name,country name): ");
+        urlBuilder.addQueryParameter("origins", scan.nextLine());
+        System.out.println("Enter your origins in term (place name,country name): ");
+        urlBuilder.addQueryParameter("destinations", scan.nextLine());
         urlBuilder.addQueryParameter("units", "imperial");
         urlBuilder.addQueryParameter("key", "YOUR_API_KEY");
 
@@ -27,27 +33,14 @@ public class Main {
                 .get()
                 .build();//object chaining (class Builder has three methods url(),get(),build()
 
-//        try (Response response = client.newCall(request).execute()) {
-//            System.out.println(response.body().string());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-        FileReader reader = null;
-        try {
-            reader = new FileReader("gmap_distance_matrix_response.json");
-            Gson gson = new Gson();
-            HashMap<String, Object> map = gson.fromJson(reader, HashMap.class);
-
-            ArrayList<Map<String, Object>> rows = (ArrayList<Map<String, Object>>) map.get("rows");
-            ArrayList<Map<String, Object>> elements = (ArrayList<Map<String, Object>>) rows.get(0).get("elements");
-            Map<String, Object> duration = (Map<String, Object>) elements.get(0).get("duration");
-            String durationText = (String) duration.get("text");
-
-            System.out.println("duration: " + durationText);
-          //  System.out.println(map);
-        } catch (FileNotFoundException e) {
+        try (Response response = client.newCall(request).execute()) {
+            String responseBody = response.body().string();
+            System.out.println(responseBody);
+            writeAndRead.writeToJsonFile(responseBody);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        writeAndRead.ReadFromJsonFile();
     }
 }
