@@ -20,7 +20,7 @@ public class Main {
         urlBuilder.addQueryParameter("origins", "TRA, Muscat");
         urlBuilder.addQueryParameter("destinations", "Oman,Adam");
         urlBuilder.addQueryParameter("units", "imperial");
-        urlBuilder.addQueryParameter("key", "YOUR_API_KEY"/*"AIzaSyBfsoqSjTk1B9TokwfMTmg2NPsO2WhO638"*/);
+        urlBuilder.addQueryParameter("key", "YOUR_API_KEY");
 
         Request request = new Request.Builder()
                 .url(urlBuilder.build().toString())
