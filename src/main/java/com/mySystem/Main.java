@@ -1,20 +1,14 @@
 package com.mySystem;
 
-import com.google.gson.Gson;
+
 import okhttp3.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scan = new Scanner(System.in);
+        UserInputHandler userInput = new UserInputHandler();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = RequestBody.create(mediaType, "");
@@ -22,9 +16,11 @@ public class Main {
         HttpUrl.Builder urlBuilder = HttpUrl.parse("https://maps.googleapis.com/maps/api/distancematrix/json").newBuilder();
 
         System.out.println("Enter your origins in term (place name,country name): ");
-        urlBuilder.addQueryParameter("origins", scan.nextLine());
+        String origin = userInput.getUserChoiceString();
+        urlBuilder.addQueryParameter("origins", origin);
         System.out.println("Enter your origins in term (place name,country name): ");
-        urlBuilder.addQueryParameter("destinations", scan.nextLine());
+        String destination = userInput.getUserChoiceString();
+        urlBuilder.addQueryParameter("destinations", destination);
         urlBuilder.addQueryParameter("units", "imperial");
         urlBuilder.addQueryParameter("key", "YOUR_API_KEY");
 
@@ -35,8 +31,8 @@ public class Main {
 
         try (Response response = client.newCall(request).execute()) {
             String responseBody = response.body().string();
-            System.out.println(responseBody);
-            writeAndRead.writeToJsonFile(responseBody);
+         //   System.out.println(responseBody);
+         //   writeAndRead.writeToJsonFile(responseBody);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
