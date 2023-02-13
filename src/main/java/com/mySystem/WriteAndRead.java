@@ -11,13 +11,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The WriteAndRead class provides methods for writing response data to a JSON file
+ * and reading the JSON data from the file.
+ */
 public class WriteAndRead {
 
+    /**
+     * Constructor for WriteAndRead class
+     */
     public WriteAndRead() {
     }
 
-    public void writeToJsonFile(String responseBody)
-    {
+    /**
+     * Writes the given response body data to a JSON file.
+     * @param responseBody The response body to be written to the JSON file.
+     */
+    public void writeToJsonFile(String responseBody) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Object responseObject = gson.fromJson(responseBody, Object.class);
 
@@ -27,8 +37,12 @@ public class WriteAndRead {
             e.printStackTrace();
         }
     }
-    public void ReadFromJsonFile()
-    {
+
+    /**
+     * Reads the JSON data from the "response.json" file and prints the duration
+     * data to the console.
+     */
+    public void ReadFromJsonFile() {
         FileReader reader = null;
         try {
             reader = new FileReader("response.json");

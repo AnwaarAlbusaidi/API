@@ -1,11 +1,14 @@
 package com.mySystem;
-
-
 import okhttp3.*;
-
 import java.io.IOException;
-
+/**
+ * Main class is responsible for sending a request to Google Distance Matrix API and handling the response.
+ */
 public class Main {
+    /**
+     * The main method sends the request to the API and handles the response.
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
 
         UserInputHandler userInput = new UserInputHandler();
@@ -32,7 +35,7 @@ public class Main {
         try (Response response = client.newCall(request).execute()) {
             String responseBody = response.body().string();
          //   System.out.println(responseBody);
-         //   writeAndRead.writeToJsonFile(responseBody);
+           //   writeAndRead.writeToJsonFile(responseBody);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
