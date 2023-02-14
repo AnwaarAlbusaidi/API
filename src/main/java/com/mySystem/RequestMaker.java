@@ -5,9 +5,20 @@ import okhttp3.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The RequestMaker class is responsible for making HTTP requests to the Google Distance Matrix API and
+ * writing the response to a JSON file.
+ */
 public class RequestMaker {
 
-    public void makeRequest( String [] origin,String [] destination) {
+    /**
+     * Sends a HTTP GET request to the Google Distance Matrix API with the specified origin and destination
+     * locations, and writes the response to a file if it doesn't already exist. Then reads the response from
+     * the file and prints it to the console.
+     * @param origin      an array of two Strings specifying the origin location in the format ["parameter", "value"].
+     * @param destination an array of two Strings specifying the destination location in the format ["parameter", "value"].
+     */
+    public void makeRequest(String[] origin, String[] destination) {
         WriteAndRead writeAndRead = new WriteAndRead();
         UserInputHandler userInput = new UserInputHandler();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -44,4 +55,3 @@ public class RequestMaker {
         writeAndRead.ReadFromJsonFile();
     }
 }
-
