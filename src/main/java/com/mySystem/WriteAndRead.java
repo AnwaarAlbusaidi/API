@@ -17,6 +17,7 @@ import java.util.Map;
  */
 public class WriteAndRead {
 
+    private static final String RESPONSE_FILE_NAME = "response.json";
     /**
      * Constructor for WriteAndRead class
      */
@@ -31,7 +32,7 @@ public class WriteAndRead {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Object responseObject = gson.fromJson(responseBody, Object.class);
 
-        try (FileWriter file = new FileWriter("response.json")) {
+        try (FileWriter file = new FileWriter(RESPONSE_FILE_NAME)) {
             gson.toJson(responseObject, file);
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +46,7 @@ public class WriteAndRead {
     public void ReadFromJsonFile() {
         FileReader reader = null;
         try {
-            reader = new FileReader("response.json");
+            reader = new FileReader(RESPONSE_FILE_NAME);
             Gson gson = new Gson();
             HashMap<String, Object> map = gson.fromJson(reader, HashMap.class);
 
