@@ -20,7 +20,6 @@ public class RequestMaker {
      */
     public void makeRequest(String[] origin, String[] destination) {
         WriteAndRead writeAndRead = new WriteAndRead();
-        UserInputHandler userInput = new UserInputHandler();
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("text/plain");
         RequestBody body = RequestBody.create(mediaType, "");
