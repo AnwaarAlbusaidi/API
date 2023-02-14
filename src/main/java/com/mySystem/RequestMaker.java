@@ -2,7 +2,6 @@ package com.mySystem;
 
 import okhttp3.*;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -32,11 +31,6 @@ public class RequestMaker {
         urlBuilder.addQueryParameter("units", "imperial");
         urlBuilder.addQueryParameter("key", "YOUR_API_KEY");
 
-        String filename = "response.json";
-        File file = new File(filename);
-
-        // if the file doesn't exist, make a new request and save the response to file
-        if (!file.exists()) {
             Request request = new Request.Builder()
                     .url(urlBuilder.build().toString())
                     .get()
@@ -49,8 +43,4 @@ public class RequestMaker {
                 throw new RuntimeException(e);
             }
         }
-
-        // read the response from file
-        writeAndRead.ReadFromJsonFile();
     }
-}

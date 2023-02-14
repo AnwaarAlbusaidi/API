@@ -12,7 +12,12 @@ public class Main {
      *             specify the destination location.
      */
     public static void main(String[] args) {
+        //make the request
         RequestMaker requestMaker = new RequestMaker();
         requestMaker.makeRequest(args[0].split(":"), args[1].split(":"));
+        //get and display the response
+        GetAndDisplayResponse displayResponse = new GetAndDisplayResponse();
+        displayResponse.DisplayResponse();
+        displayResponse.getDurationText();
     }
 }
