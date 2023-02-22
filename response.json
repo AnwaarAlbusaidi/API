@@ -1,0 +1,26 @@
+{
+  "destination_addresses": [
+    "Fanja, Oman"
+  ],
+  "origin_addresses": [
+    "Airport Heights,SEEB، H7PR+2JQ, Muscat, Oman"
+  ],
+  "rows": [
+    {
+      "elements": [
+        {
+          "distance": {
+            "text": "23.3 mi",
+            "value": 37447.0
+          },
+          "duration": {
+            "text": "31 mins",
+            "value": 1871.0
+          },
+          "status": "OK"
+        }
+      ]
+    }
+  ],
+  "status": "OK"
+}
